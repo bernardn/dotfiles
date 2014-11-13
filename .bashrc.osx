@@ -1,16 +1,34 @@
 ### OSX specific stuff
-
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
+# Brew-related stuff
+echo -n " osx:"
+brew_pfx=$(brew --prefix 2>/dev/null)
+if [ ! -z "$brew_pfx" ]; then
+	if [ -f $brew_pfx/etc/bash_completion ]; then
+		echo -n " bash-completion"
+		source $brew_pfx/etc/bash_completion
+	fi
+	if [ -f $brew_pfx/etc/bash_completion.d/git-completion.bash ]; then
+		echo -n " git-completion"
+		source $brew_pfx/etc/bash_completion.d/git-completion.bash
+	fi
+	if [ -f $brew_pfx/etc/grc.bashrc ]; then
+		echo -n " grc"
+		source $brew_pfx/etc/grc.bashrc
+	fi
+	# Add homebrew sbin to PATH variable
+	test -d $brew_pfx/sbin && export PATH=$PATH:$brew_pfx/sbin
 fi
 
-alias komodo="/Applications/Komodo\ Edit\ 8.app/Contents/MacOS/komodo"
-
-# Fix due to my exotic locale
-for v in 'LANG LC_COLLATE LC_CTYPE LC_MESSAGES LC_MONETARY LC_NUMERIC LC_TIME LC_ALL'; do
-	declare $v=en_US.UTF-8;
-	export $v;
+# Fix locale
+for k in LC_COLLATE LC_CTYPE LC_MESSAGES LC_MONETARY LC_NUMERIC LC_TIME; do
+	v=$(printenv $k)
+	d="/usr/share/locale/"${v:-"null"}
+	test $k =  'LC_ALL' && test -d $d && LC_FALLBACK=$LC_ALL
+	test $k != 'LC_ALL' && test ! -d $d && declare $k=$LC_FALLBACK && export $k;
 done
+
+## Aliases
+alias komodo="/Applications/Komodo\ Edit\ 8.app/Contents/MacOS/komodo"
 
 alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
 
@@ -19,3 +37,8 @@ alias hibernate='sudo pmset -a hibernatemode 25'
 alias sleep='sudo pmset -a hibernatemode 0'
 alias safesleep='sudo pmset -a hibernatemode 3'
 alias smartsleep='sudo pmset -a hibernatemode 2'
+
+## Colorization
+export LSCOLORS=ExfxcxdxBxegedabagacad
+
+echo -n \;

@@ -1,0 +1,10 @@
+### .bashr.other : included file for Other Systems
+echo -n " other:"
+
+## Aliases
+alias ls='ls --color=auto'
+
+## Java
+test -d /etc/alternatives/jre && export JAVA_HOME='/etc/alternatives/jre'
+
+echo -n \;

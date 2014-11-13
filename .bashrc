@@ -1,23 +1,34 @@
 # .bashc
+echo -n Loading common
 
-# Show dirty state in prompt when in Git repos
-export GIT_PS1_SHOWDIRTYSTATE=1
+export TERM=xterm
+
+### Timezone
+# Change session timezone
+function tz {
+		test -z $1 && echo $TZ || export TZ=$1; ttz=$(date '+%Z');
+		test "! -z $1 & $ttz != $1" && export TZ=$ttz;
+}
+
+# Set Current timezone
+test -z $TZ && tz=$(date '+%Z') && echo -n " $tz" && tz $tz;
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# Java
-test -d /etc/alternatives/jre && export JAVA_HOME='/etc/alternatives/jre'
+# Git states in prompt when in Git repos
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWCOLORHINTS=1
+GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWUPSTREAM=""
 
-export PATH=~/bin:$PATH
+# Locale fix
+LC_FALLBACK=$(locale -a|egrep -ie 'en_us.utf.?8')
 
-# User specific aliases and functions
 ### ALIASES ###
-
-# git command autocompletion script
-test -f  ~/bin/git-completion.bash && source ~/bin/git-completion.bash
 
 # git commands simplified
 alias gst='git status'
@@ -32,18 +43,9 @@ alias glg='git log --date-order --all --graph --format="%C(green)%h%Creset %C(ye
 alias glg2='git log --date-order --all --graph --name-status --format="%C(green)%H%Creset %C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset%s"'
 
 # directory listings
-#alias ls='ls --color=auto' 
 alias ls='ls -hG'
 alias ll='ls -l'
-alias lla='ls -la'
-
-# ls alias for color-mode
-alias lh='ls -lhaG'
-
-# OSX
-if [[ -d '/System/Library/CoreServices' ]]; then
-	test -f ~/.bashrc.osx && . ~/.bashrc.osx
-fi
+alias la='ls -la'
 
 # up 'n' folders
 alias ..='cd ..'
@@ -52,11 +54,11 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
 # simple ip
-alias ip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\ -f2'
+alias ips='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d" " -f2'
 # more details
-alias ip1="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+alias ip2="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 # external ip
-alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
+alias ip-wan="curl -s http://wtfismyip.com/text | awk '{print $1}'"
 
 # grep with color
 alias grep='grep --color=auto'
@@ -67,14 +69,31 @@ alias grep='grep --color=auto'
 # refresh shell
 alias reload='source ~/.bash_profile'
 
-export TERM=xterm
+### Git
+## git command autocompletion script
+# Found at https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+test -f ~/bin/git-completion.bash && echo -n " git-completion" && source ~/bin/git-completion.bash
 
-# Load AWS-related stuff
-test -f ~/.aws.rc && source ~/.aws.rc
+## git prompt
+# Found at https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+test -f  ~/bin/git-prompt.sh && echo -n " git-prompt" && source ~/bin/git-prompt.sh
 
+### Load AWS-related stuff
+test -f ~/.aws.rc && echo -n " aws" && source ~/.aws.rc
 
-# Git prompt
-test -f  ~/bin/git-prompt.sh && source ~/bin/git-prompt.sh
-
+### Prompt
 PS1_OLD=${PS1}
-PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[1;92m\]$(__git_ps1 " (%s)")\[\e[1;32m\] \$\[\e[m\] \[\e[0;37m\]'
+PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[1;92m\]$(__git_ps1 " | %s")\[\e[1;32m\] \$\[\e[m\] \[\e[0;37m\]'
+
+### OSX
+if [[ -d '/System/Library/CoreServices' ]]; then
+	test -f ~/.bashrc.osx && . ~/.bashrc.osx
+else
+### Other Systems
+    test -f ~/.bashrc.other && . ~/.bashrc.other
+fi
+
+### User bin dir in path
+export PATH=~/bin:$PATH
+
+echo

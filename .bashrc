@@ -63,19 +63,27 @@ alias ip-wan="curl -s http://wtfismyip.com/text | awk '{print $1}'"
 # grep with color
 alias grep='grep --color=auto'
 
+# SSH
+alias    ssh-insecure='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+function ssh-exec      { s="$1" && shift && ssh "$s" "bash -c '$*'" ; }
+function ssh-exec-file { test -f "$2" && test -x "$2" && ssh "$1" "bash -s " <  "$2"  ; }
+
+# Disk usage
+function du-max { d=${1:-"."}; n=${2:-"15"}; test -d "$d" && du -m "$d" 2>/dev/null | grep ^[1-9][0-9]*$j\\s | sort -nr -k 1 | head -n "$n" || echo Directory "$d" disk usage analysis Failed.; }
+
 # processes
-#alias ps='ps -ax'
+alias psx='ps -ax'
 
 # refresh shell
 alias reload='source ~/.bash_profile'
 
 ### Git
 ## git command autocompletion script
-# Found at https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+# Found at raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 test -f ~/bin/git-completion.bash && echo -n " git-completion" && source ~/bin/git-completion.bash
 
 ## git prompt
-# Found at https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+# Found at raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 test -f  ~/bin/git-prompt.sh && echo -n " git-prompt" && source ~/bin/git-prompt.sh
 
 ### Load AWS-related stuff

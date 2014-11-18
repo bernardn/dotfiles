@@ -1,0 +1,2 @@
+### Load AWS-related stuff
+test -f ~/.aws.rc && echo -n " aws" && source ~/.aws.rc

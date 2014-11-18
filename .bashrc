@@ -1,5 +1,5 @@
 # .bashc
-echo -n Loading common
+echo -n Loading common:
 
 export TERM=xterm
 
@@ -30,18 +30,6 @@ LC_FALLBACK=$(locale -a|egrep -ie 'en_us.utf.?8')
 
 ### ALIASES ###
 
-# git commands simplified
-alias gst='git status'
-alias gco='git checkout'
-alias gci='git commit'
-alias grb='git rebase'
-alias gbr='git branch'
-alias gad='git add -A'
-alias gpl='git pull'
-alias gpu='git push'
-alias glg='git log --date-order --all --graph --format="%C(green)%h%Creset %C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset%s"'
-alias glg2='git log --date-order --all --graph --name-status --format="%C(green)%H%Creset %C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset%s"'
-
 # directory listings
 alias ls='ls -hG'
 alias ll='ls -l'
@@ -69,7 +57,10 @@ function ssh-exec      { s="$1" && shift && ssh "$s" "bash -c '$*'" ; }
 function ssh-exec-file { test -f "$2" && test -x "$2" && ssh "$1" "bash -s " <  "$2"  ; }
 
 # Disk usage
-function du-max { d=${1:-"."}; n=${2:-"15"}; test -d "$d" && du -m "$d" 2>/dev/null | grep ^[1-9][0-9]*$j\\s | sort -nr -k 1 | head -n "$n" || echo Directory "$d" disk usage analysis Failed.; }
+function du-max { d=${1:-"."}; n=${2:-"15"}; test -d "$d" && du -m "$d" 2>/dev/null | grep ^[1-9][0-9]*\\s | sort -nr -k 1 | head -n "$n" || echo Directory "$d" disk usage analysis Failed.; }
+
+# Group members
+function group-members { grep ^"$1" /etc/group | awk -F':' '/'"$1"'/{print $4}' | tr ',' '\n' | sort | uniq | xargs; }
 
 # processes
 alias psx='ps -ax'
@@ -77,29 +68,12 @@ alias psx='ps -ax'
 # refresh shell
 alias reload='source ~/.bash_profile'
 
-### Git
-## git command autocompletion script
-# Found at raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-test -f ~/bin/git-completion.bash && echo -n " git-completion" && source ~/bin/git-completion.bash
-
-## git prompt
-# Found at raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
-test -f  ~/bin/git-prompt.sh && echo -n " git-prompt" && source ~/bin/git-prompt.sh
-
-### Load AWS-related stuff
-test -f ~/.aws.rc && echo -n " aws" && source ~/.aws.rc
-
 ### Prompt
 PS1_OLD=${PS1}
-PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[1;92m\]$(__git_ps1 " | %s")\[\e[1;32m\] \$\[\e[m\] \[\e[0;37m\]'
+PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[1;92m\]$EXTRAPS1\[\e[1;32m\] \$\[\e[m\] \[\e[0;37m\]'
 
-### OSX
-if [[ -d '/System/Library/CoreServices' ]]; then
-	test -f ~/.bashrc.osx && . ~/.bashrc.osx
-else
-### Other Systems
-    test -f ~/.bashrc.other && . ~/.bashrc.other
-fi
+### Import custom files
+ls -A ~/.bashrc.d>/dev/null && for f in ~/.bashrc.d/*; do source "$f"; done
 
 ### User bin dir in path
 export PATH=~/bin:$PATH

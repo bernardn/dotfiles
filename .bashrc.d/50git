@@ -1,0 +1,24 @@
+### Git
+if which git>/dev/null; then echo -n git:
+	## git command autocompletion script
+	# Found at raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+	test -f ~/bin/git-completion.bash && echo -n " git-completion" && source ~/bin/git-completion.bash
+	
+	## git prompt
+	# Found at raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+	test -f  ~/bin/git-prompt.sh && echo -n " git-prompt" && source ~/bin/git-prompt.sh && EXTRAPS1=$(__git_ps1 " | %s")
+	
+	# git commands simplified
+	alias gst='git status'
+	alias gco='git checkout'
+	alias gci='git commit'
+	alias grb='git rebase'
+	alias gbr='git branch'
+	alias gad='git add -A'
+	alias gpl='git pull'
+	alias gpu='git push'
+	alias glg='git log --date-order --all --graph --format="%C(green)%h%Creset %C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset%s"'
+	alias glg2='git log --date-order --all --graph --name-status --format="%C(green)%H%Creset %C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset%s"'
+	
+	echo -n \;
+fi

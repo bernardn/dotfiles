@@ -1,5 +1,5 @@
 # .bashc
-echo -n Loading common:
+echo -en "\033[1;30mLoading common:"
 
 export TERM=xterm
 

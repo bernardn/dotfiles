@@ -73,7 +73,7 @@ PS1_OLD=${PS1}
 PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[1;92m\]$EXTRAPS1\[\e[1;32m\] \$\[\e[m\] \[\e[0;37m\]'
 
 ### Import custom files
-ls -A ~/.bashrc.d>/dev/null && for f in ~/.bashrc.d/*; do source "$f"; done
+ls -A ~/.bashrc.d>/dev/null 2>&1 && for f in ~/.bashrc.d/*; do source "$f"; done
 
 ### User bin dir in path
 export PATH=~/bin:$PATH

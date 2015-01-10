@@ -65,6 +65,9 @@ function group-members { grep ^"$1" /etc/group | awk -F':' '/'"$1"'/{print $4}' 
 # processes
 alias psx='ps -ax'
 
+# password generator
+function pw-gen { c=${1:-32}; dd if=/dev/random of=/dev/stdout bs="$c" count=1 2>/dev/null|base64|sed 's/=*$//'; }
+
 # refresh shell
 alias reload='source ~/.bash_profile'
 

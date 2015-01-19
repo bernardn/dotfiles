@@ -53,8 +53,14 @@ alias grep='grep --color=auto'
 
 # SSH
 alias    ssh-insecure='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-function ssh-exec      { s="$1" && shift && ssh "$s" "bash -c '$*'" ; }
-function ssh-exec-file { test -f "$2" && test -x "$2" && ssh "$1" "bash -s " <  "$2"  ; }
+function ssh-exec      { h="$1" && shift && ssh "$h" "bash -c '$*'" ; }
+function ssh-exec-file {
+               h="$1" && shift
+               s="$1" && shift
+               test ! -f "$s" && echo script file $s does not exist && exit 1
+               test ! -x "$s" && echo script file $s is not executable && exit 1
+               ssh "$h" "bash -s " <  "$s" "$@" ;
+}
 
 # Disk usage
 function du-max { d=${1:-"."}; n=${2:-"15"}; test -d "$d" && du -m "$d" 2>/dev/null | grep ^[1-9][0-9]*\\s | sort -nr -k 1 | head -n "$n" || echo Directory "$d" disk usage analysis Failed.; }
@@ -73,7 +79,7 @@ alias reload='source ~/.bash_profile'
 
 ### Prompt
 PS1_OLD=${PS1}
-PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[1;92m\]$EXTRAPS1\[\e[1;32m\] \$\[\e[m\] \[\e[0;37m\]'
+PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\]\[\e[1;92m\]$(__git_ps1 " | %s")\[\e[1;32m\] \$\[\e[m\] \[\e[0;37m\]'
 
 ### Import custom files
 ls -A ~/.bashrc.d>/dev/null 2>&1 && for f in ~/.bashrc.d/*; do source "$f"; done

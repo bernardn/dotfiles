@@ -1,4 +1,4 @@
-### .bashr.linux : included file for Linux Systems
+### 10sys linux : included file for Linux Systems
 if  n=$(uname -s); test ${n::5} = 'Linux'; then echo -n " linux:"
 
 	## Aliases

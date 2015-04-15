@@ -10,34 +10,39 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $Locker i3lock -z -i /boot/EFI/refind/4finance-logo.png && sleep 1
 
-set $Locker i3lock -t -i /boot/EFI/refind/4finance-logo.png && sleep 1
-
+focus_follows_mouse no
 
 # autostart
+exec --no-startup-id ~/bin/scr-office.sh office
 exec --no-startup-id nm-applet
-exec hipchat
-exec skype
 #exec empathy
 #exec google-chrome
 #exec urxvt
 exec urxvt -e tmux
-exec firefox
+#exec firefox
+exec chromium
 exec komodo
 #exec evolution
 #exec dropbox start
 exec /bin/keepass ~/Dropbox/sec/devops-bn.kdbx &
 exec --no-startup-id ~/bin/snx-track &
+exec hipchat
+exec skype
+
 
 # workspace assignment (use "xprop")
-assign [class="^Remmina$"] 2
+assign [class="^Remmina$"] 7
 assign [class="^Empathy$"] 8
 assign [title="^HipChat*"] 8
 assign [class="^Skype$"] 8
 assign [class="^Google-chrome$"] 4
-assign [class="^Firefox$"] 4
+assign [class="^Chromium$"] 5
+assign [class="^Firefox$"] 5
 assign [class="^Evolution$"] 9
 assign [class="^Komodo*"] 6
+
 for_window [class="^KeePass2$"] move to scratchpad
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -196,9 +201,9 @@ mode "resize" {
         bindsym semicolon resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
+        bindsym Up resize grow height 10 px or 10 ppt
+        bindsym Down resize shrink height 10 px or 10 ppt
         bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape

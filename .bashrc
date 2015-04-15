@@ -11,7 +11,7 @@ function tz {
 }
 
 # Set Current timezone
-test -z $TZ && tz=$(date '+%Z') && echo -n " $tz" && tz $tz;
+# test -z $TZ && tz=$(date '+%Z') && echo -n " $tz" && tz $tz;
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then

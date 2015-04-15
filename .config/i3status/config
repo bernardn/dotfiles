@@ -37,7 +37,8 @@ battery 0 {
 }
 
 run_watch DHCP {
-        pidfile = "/var/run/dhcpcd-*.pid"
+#        pidfile = "/var/run/dhcpcd-*.pid"
+        pidfile = "/var/run/dhclient-*.pid"
 #        format="%title: %status"
         format="%title"
 }

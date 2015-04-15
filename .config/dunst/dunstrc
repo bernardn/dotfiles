@@ -149,10 +149,10 @@
     browser = /usr/bin/firefox -new-tab
 
     # Align icons left/right/off
-    icon_position = off
+    icon_position = left
 
     # Paths to default icons.
-    icon_folders = /usr/share/icons/oxygen/16x16/status/:/usr/share/icons/oxygen/16x16/devices/
+    icon_folders = /usr/share/icons/hicolor/16x16/apps/:/usr/share/icons/oxygen/16x16/status/:/usr/share/icons/oxygen/16x16/devices/
 
 [frame]
     width = 3
@@ -243,7 +243,34 @@
 #    appname = Pidgin
 #    summary = *says*
 #    urgency = critical
-#
+[mentioned-me]
+    appname = HipChat
+    body    = *@BernardNauwelaerts*
+    urgency = critical
+
+[mentioned-all]
+    appname = HipChat
+    body    = *@all*
+    urgency = critical
+
+[mentioned-here]
+    appname = HipChat
+    body    = *@here*
+    urgency = critical
+
+
+[im-received]
+#    icon     = "*skype*"
+    category = im.received
+    urgency  = critical
+    format   = "<b>Message from %s</b>\n%b"
+
+[im-default]
+#    icon     = "*skype*"
+    category = presence.*
+    urgency  = low
+    format = "<b>%s</b>\n%b"
+
 #[twitter]
 #    appname = Pidgin
 #    summary = *twitter.com*

@@ -30,6 +30,8 @@ if n=$(uname); test ${n::6} = "Darwin" ; then echo -n " osx:"
 	## Aliases
 	alias komodo="/Applications/Komodo\ Edit\ 8.app/Contents/MacOS/komodo"
 	
+	alias app-signature="codesign -dvvv"
+
 	alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
 	
 	# hibernation and sleep settings

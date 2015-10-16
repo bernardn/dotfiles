@@ -1,0 +1,6 @@
+upgrade-system: pacman -Syu
+install-packages: pacman -S -
+search-packages: pacman -Ss -
+installed-packages:  pacman -Qqen
+modified-config-files:  pacman -Qii | awk '/^MODIFIED/ {print $2}'
+orphan-packages: pacman -Qtdq

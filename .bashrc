@@ -88,3 +88,8 @@ ls -A ~/.bashrc.d>/dev/null 2>&1 && for f in ~/.bashrc.d/*; do source "$f"; done
 export PATH=~/bin:$PATH
 
 echo
+
+# Setting PATH for Python 3.6
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+export PATH

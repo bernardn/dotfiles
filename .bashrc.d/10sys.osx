@@ -28,7 +28,7 @@ if n=$(uname); test ${n::6} = "Darwin" ; then echo -n " osx:"
 	done
 	
 	## Aliases
-	alias komodo="/Applications/Komodo\ Edit\ 8.app/Contents/MacOS/komodo"
+	alias komodo="/Applications/Komodo\ Edit\ 10.app/Contents/MacOS/komodo"
 	
 	alias app-signature="codesign -dvvv"
 
@@ -36,10 +36,10 @@ if n=$(uname); test ${n::6} = "Darwin" ; then echo -n " osx:"
 	
 	# hibernation and sleep settings
 	alias hibernate='sudo pmset -a hibernatemode 25'
-	alias sleep='sudo pmset -a hibernatemode 0'
+	alias asleep='sudo pmset -a hibernatemode 0'
 	alias safesleep='sudo pmset -a hibernatemode 3'
 	alias smartsleep='sudo pmset -a hibernatemode 2'
-	
+	alias logic='/Applications/Logic\ Pro\ X.app/Contents/MacOS/Logic\ Pro\ X'
 	function group-members-bsd { dscacheutil -q group -a name "$1" | grep ^users | sed 's/^users: //'; }
 	
 	## Colorization

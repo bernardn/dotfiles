@@ -1,0 +1,8 @@
+### Git
+if which docker &>/dev/null; then echo -n ' docker:'
+
+	# Ansible
+	alias apb='docker run --rm -i -v $(pwd):/work -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/.ssh/known_hosts:/root/.ssh/known_hosts ais/ansible-perl:alpine-latest'
+
+	echo -n \;
+fi

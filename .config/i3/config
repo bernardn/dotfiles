@@ -10,23 +10,25 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $Locker i3lock -z -i /boot/EFI/refind/4finance-logo.png && sleep 1
+set $Locker i3lock -i /boot/EFI/refind/4finance-logo.png && sleep 1
 
 focus_follows_mouse no
 
 # autostart
+exec --no-startup-id export $(gnome-keyring-daemon -d -c ssh)
 exec --no-startup-id ~/bin/scr-office.sh office
 exec --no-startup-id nm-applet
+exec parcellite
 #exec empathy
 #exec google-chrome
 #exec urxvt
-exec urxvt -e tmux
+exec termite 
 #exec firefox
 exec chromium
 exec komodo
 #exec evolution
 #exec dropbox start
-exec /bin/keepass ~/Dropbox/sec/devops-bn.kdbx &
+exec /bin/keepassx ~/Dropbox/sec/devops-bn.kdbx &
 exec --no-startup-id ~/bin/snx-track &
 exec hipchat
 exec skype
@@ -43,7 +45,7 @@ assign [class="^Firefox$"] 5
 assign [class="^Evolution$"] 9
 assign [class="^Komodo*"] 6
 
-for_window [class="^KeePass2$"] move to scratchpad
+for_window [class="^keepassx$"] move to scratchpad
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -56,7 +58,8 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec urxvt -mod mod5
+#bindsym $mod+Return exec urxvt -mod mod5
+bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -230,6 +233,6 @@ bar {
 }
 
 # scrot & gimp - root
-#bindsym Print exec scrot -e 'mv $f /tmp/ && pinta /tmp/$f'
+bindsym Print exec scrot -e 'mv $f /tmp/ && pinta /tmp/$f'
 # scrot & gimp - select window or rectangle
-#bindsym $mod+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
+bindsym $mod+Print exec scrot -s -e 'mv $f /tmp/ && pinta /tmp/$f'

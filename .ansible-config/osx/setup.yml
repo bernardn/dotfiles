@@ -1,0 +1,56 @@
+---
+- hosts: localhost
+  vars:
+    packages:
+      brew:
+        - name: docker
+        - name: mas
+        - name: terraform
+      cask:
+        - name: rancher
+      mas:
+        - 467622356  # Abby Lingvo
+        - 497799835  # XCode
+        - 930093508  # Shapes
+        - 425424353  # The Unarchiver
+        - 803453959  # Slack
+    packages_exclude:
+      brew: []
+      cask: []
+      mas: []
+    osx_defaults:
+    - key: AppleMeasurementUnits
+      type: string
+      value: Centimeters
+    - key: AppleLanguages
+      type: array
+      value:
+        - "en-US"
+        - "cs-CZ"
+        - "ru-RU"
+        - "fr-BE"
+        - "nl-NL"
+    - domain: com.apple.Safari
+      key: IncludeInternalDebugMenu
+      type: bool
+      value: true
+    - domain: com.apple.desktopservices
+      key: DSDontWriteNetworkStores
+      type: bool
+      value: true
+    - domain: com.apple.finder
+      key: FXDefaultSearchScope
+      type: string
+      value: SCcf
+    - domain: com.apple.finder
+      key: FXEnableExtensionChangeWarning
+      type: bool
+      value: false
+    - domain: com.apple.screencapture
+      key: location
+      type: string
+      value: /Users/bernardn/Pictures/screenshots
+  roles:
+  - role: brew
+  - role: defaults
+  - role: dotfiles

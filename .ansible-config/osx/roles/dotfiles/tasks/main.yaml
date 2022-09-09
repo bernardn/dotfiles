@@ -1,0 +1,14 @@
+---
+
+- name: Git Repo
+  ansible.builtin.git:
+    repo: 'git@github.com:bernardn/dotfiles.git'
+    dest: /Users/bernardn/.dotfiles/
+    single_branch: yes
+    version: master
+
+- name: Source .bashrc
+  ansible.builtin.lineinfile:
+    path: /Users/bernardn/.bash_profile
+    line: '. ~/.dotfiles/.bashrc'
+    insertbefore: BOF

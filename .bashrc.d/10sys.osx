@@ -1,6 +1,10 @@
 ### OSX specific stuff
 if n=$(uname); test ${n::6} = "Darwin" ; then echo -n " osx:"
+	# Make OSX quiet about using BASH
+	export BASH_SILENCE_DEPRECATION_WARNING=1
+	
 	# Brew-related stuff
+	export PATH=${PATH}:/opt/homebrew/bin/
 	brew_pfx=$(brew --prefix 2>/dev/null)
 	if [ ! -z "$brew_pfx" ]; then
 		if [ -f $brew_pfx/etc/bash_completion ]; then
@@ -36,7 +40,7 @@ if n=$(uname); test ${n::6} = "Darwin" ; then echo -n " osx:"
 	
 	# hibernation and sleep settings
 	alias hibernate='sudo pmset -a hibernatemode 25'
-	alias asleep='sudo pmset -a hibernatemode 0'
+	alias sleepmode='sudo pmset -a hibernatemode 0'
 	alias safesleep='sudo pmset -a hibernatemode 3'
 	alias smartsleep='sudo pmset -a hibernatemode 2'
 	alias logic='/Applications/Logic\ Pro\ X.app/Contents/MacOS/Logic\ Pro\ X'
@@ -44,6 +48,10 @@ if n=$(uname); test ${n::6} = "Darwin" ; then echo -n " osx:"
 	
 	## Colorization
 	export LSCOLORS=ExfxcxdxBxegedabagacad
-	
+
+	## Python
+	PATH="/Library/Frameworks/Python.framework/Versions/Current/bin:${PATH}"
+	export PATH
+
 	echo -n \;
 fi

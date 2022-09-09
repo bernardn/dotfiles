@@ -1,2 +1,5 @@
 ### Load AWS-related stuff
 test -f ~/.aws.rc && echo -n " aws" && source ~/.aws.rc
+
+function aws-region { test -z "$1" || export AWS_DEFAULT_REGION="$1"; echo ${AWS_DEFAULT_REGION};  }
+alias aws-rds-endpoints="aws rds describe-db-instances|jq -r '.DBInstances[].Endpoint.Address'"

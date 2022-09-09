@@ -1,0 +1,12 @@
+---
+- name: Setting OSX Defaults
+  community.general.osx_defaults:
+    domain: "{{ item.domain | default('NSGlobalDomain') }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ osx_defaults }}"
+
+#- name: "Show the ~/Library folder"
+#  command: chflags nohidden ~/Library

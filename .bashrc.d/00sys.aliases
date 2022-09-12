@@ -24,7 +24,7 @@ alias ip-wan="curl -s http://wtfismyip.com/text | awk '{print $1}'"
 alias grep='grep --color=auto'
 
 # SSH
-alias    ssh-insecure='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias ssh-insecure='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 
 # refresh shell
 alias reload='source ~/.bash_profile'
@@ -32,6 +32,8 @@ alias reload='source ~/.bash_profile'
 # processes
 alias psx='ps -ax'
 
+# Terraform
+alias tf='terraform'
 
 ### FUNCTIONS ###
 

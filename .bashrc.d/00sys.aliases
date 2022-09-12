@@ -41,8 +41,8 @@ function ssh-exec      { h="$1" && shift && ssh "$h" "bash -c '$*'" ; }
 function ssh-exec-file {
     h="$1" && shift
     s="$1" && shift
-    test ! -f "$s" && echo script file $s does not exist && exit 1
-    test ! -x "$s" && echo script file $s is not executable && exit 1
+    test ! -f "$s" && echo "script file $s does not exist" && exit 1
+    test ! -x "$s" && echo "script file $s is not executable" && exit 1
     ssh "$h" "bash -s " <  "$s" "$@" ;
 }
 

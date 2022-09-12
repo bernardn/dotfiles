@@ -6,6 +6,7 @@
         - name: mas
         - name: terraform
       cask:
+        - name: google-chrome
         - name: pycharm-ce
         - name: rancher
       mas:

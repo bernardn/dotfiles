@@ -3,10 +3,10 @@
   vars:
     packages:
       brew:
-        - name: docker
         - name: mas
         - name: terraform
       cask:
+        - name: pycharm-ce
         - name: rancher
       mas:
         - 467622356  # Abby Lingvo
@@ -38,6 +38,22 @@
       key: DSDontWriteNetworkStores
       type: bool
       value: true
+    - domain: com.apple.dock
+      key: autohide
+      type: bool
+      value: true
+    - domain: com.apple.dock
+      key: largesize
+      type: float
+      value: 57
+    - domain: com.apple.dock
+      key: magnification
+      type: bool
+      value: true
+    - domain: com.apple.dock
+      key: tilesize
+      type: float
+      value: 33
     - domain: com.apple.finder
       key: FXDefaultSearchScope
       type: string

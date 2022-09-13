@@ -6,15 +6,17 @@
         - name: mas
         - name: terraform
       cask:
+        - name: eset-cyber-security-pro
         - name: google-chrome
         - name: pycharm-ce
         - name: rancher
+        - name: veracrypt
       mas:
+        - 425424353  # The Unarchiver
         - 467622356  # Abby Lingvo
         - 497799835  # XCode
-        - 930093508  # Shapes
-        - 425424353  # The Unarchiver
         - 803453959  # Slack
+        - 930093508  # Shapes
     packages_exclude:
       brew: []
       cask: []
@@ -28,9 +30,9 @@
       value:
         - "en-US"
         - "cs-CZ"
-        - "ru-RU"
         - "fr-BE"
         - "nl-NL"
+        - "ru-RU"
     - domain: com.apple.Safari
       key: IncludeInternalDebugMenu
       type: bool
@@ -63,6 +65,18 @@
       key: FXEnableExtensionChangeWarning
       type: bool
       value: false
+    - domain: com.apple.finder
+      key: FXPreferredViewStyle
+      type: string
+      value: Nlsv
+    - domain: com.apple.finder
+      key: QuitMenuItem
+      type: bool
+      value: true
+    - domain: com.apple.finder
+      key: ShowPathbar
+      type: bool
+      value: true
     - domain: com.apple.screencapture
       key: location
       type: string

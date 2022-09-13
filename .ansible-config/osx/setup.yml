@@ -5,9 +5,11 @@
       brew:
         - name: mas
         - name: terraform
+        - name: tfsec
       cask:
         - name: eset-cyber-security-pro
         - name: google-chrome
+        - name: iterm2
         - name: pycharm-ce
         - name: rancher
         - name: veracrypt

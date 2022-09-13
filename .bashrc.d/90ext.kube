@@ -8,4 +8,6 @@ which -s kubectl && echo -n " kube" && {
 	alias kl="kubectl logs"
 	alias kgs="kubectl get services"
 	alias kgsa="kubectl get services --all-namespaces"
+
+	test -d ~/.rd/bin/ && export PATH=$PATH:~/.rd/bin/
 }

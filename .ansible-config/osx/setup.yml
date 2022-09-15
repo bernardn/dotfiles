@@ -3,12 +3,14 @@
   vars:
     packages:
       brew:
+        - name: fzf
         - name: mas
         - name: terraform
         - name: tfsec
       cask:
         - name: eset-cyber-security-pro
         - name: google-chrome
+        - name: google-cloud-sdk
         - name: iterm2
         - name: pycharm-ce
         - name: rancher
@@ -39,6 +41,10 @@
       key: IncludeInternalDebugMenu
       type: bool
       value: true
+    - domain: com.apple.desktop
+      key: Background
+      type: string
+      value: '{default = {ImageFilePath = "/Users/bernardn/Pictures/Desktop/new-iguana-species-found-hiding-in-plain-sight-4.png"; };}'
     - domain: com.apple.desktopservices
       key: DSDontWriteNetworkStores
       type: bool

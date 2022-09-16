@@ -1,10 +1,11 @@
 ### Load Kubernetes-related stuff
-
 # Rancher Desktop
 test -d ~/.rd/bin/ && export PATH=$PATH:~/.rd/bin/
 
 which -s kubectl && echo -n " kube" && {
 	function kns { test -z "$1" || kubectl config set-context --current --namespace="$1";  }
+	function kctx { test -z "$1" || kubectl config use-context "$1" || kubectl config get-contexts; kubectl config current-context; }
+
 	alias k=kubectl
 	alias kgp="kubectl get pods"
 	alias kgpa="kubectl get pods --all-namespaces"

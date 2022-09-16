@@ -4,16 +4,19 @@
     packages:
       brew:
         - name: fzf
+        - name: helm
         - name: mas
         - name: terraform
         - name: tfsec
       cask:
+        - name: cloudflare-warp
+        - name: docker
         - name: eset-cyber-security-pro
         - name: google-chrome
         - name: google-cloud-sdk
         - name: iterm2
         - name: pycharm-ce
-        - name: rancher
+        # - name: rancher
         - name: veracrypt
       mas:
         - 425424353  # The Unarchiver

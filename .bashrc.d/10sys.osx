@@ -2,7 +2,7 @@
 if n=$(uname); test ${n::6} = "Darwin" ; then echo -n " osx:"
 	# Make OSX quiet about using BASH
 	export BASH_SILENCE_DEPRECATION_WARNING=1
-	
+
 	# Brew-related stuff
 	export PATH=${PATH}:/opt/homebrew/bin/
 	brew_pfx=$(brew --prefix 2>/dev/null)
@@ -32,12 +32,12 @@ if n=$(uname); test ${n::6} = "Darwin" ; then echo -n " osx:"
 	done
 	
 	## Aliases
-	alias komodo="/Applications/Komodo\ Edit\ 10.app/Contents/MacOS/komodo"
-	
 	alias app-signature="codesign -dvvv"
 
 	alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
-	
+
+  alias ssh-load-kc="ssh-add --apple-load-keychain"
+
 	# hibernation and sleep settings
 	alias hibernate='sudo pmset -a hibernatemode 25'
 	alias sleepmode='sudo pmset -a hibernatemode 0'

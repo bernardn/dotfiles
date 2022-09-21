@@ -1,6 +1,7 @@
+#!/bin/bash
+### ALIASES ###
 echo -n " aliases:"
 
-### ALIASES ###
 
 # directory listings
 alias ls='ls -hG'

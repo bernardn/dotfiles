@@ -1,4 +1,5 @@
-### Git
+#!/bin/bash
+### Docker
 if which docker &>/dev/null; then echo -n ' docker:'
 
 	# Ansible

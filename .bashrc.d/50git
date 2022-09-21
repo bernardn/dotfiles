@@ -1,3 +1,4 @@
+#!/bin/bash
 ### Git
 if which git>/dev/null; then echo -n ' git:'
 

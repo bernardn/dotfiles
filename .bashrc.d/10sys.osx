@@ -1,3 +1,4 @@
+#!/bin/bash
 ### OSX specific stuff
 if n=$(uname); test ${n::6} = "Darwin" ; then echo -n " osx:"
 	# Make OSX quiet about using BASH

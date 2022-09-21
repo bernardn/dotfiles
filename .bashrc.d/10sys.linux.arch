@@ -1,3 +1,4 @@
+#!/bin/bash
 ### ARCH Linux specific
 
 if n=$(cat /etc/os-release 2>/dev/null|grep ^ID=|cut -d= -f2); test "$n" = 'arch'; then

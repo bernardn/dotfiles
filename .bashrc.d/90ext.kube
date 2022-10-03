@@ -24,7 +24,9 @@ which -s kubectl && echo -n " kube" && {
 	    kubectl port-forward "$(select\-pod)" "$1:$1";
 	  fi
   }
-
+  function select-pod {
+    kubectl get pod | grep -v NAME | fzf | awk '{print $1}'
+  }
 
 	alias k=kubectl
 	alias kdp="kubectl delete pods"

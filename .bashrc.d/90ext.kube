@@ -12,7 +12,9 @@ which -s kubectl && echo -n " kube" && {
 	  kubectl logs "$(select\-pod)" "$1";
 	}
 	function kns {
-	    test -z "$1" || kubectl config set-context --current --namespace="$1";
+	    _ns="$1"
+	    test -z "$_ns" && _ns="$(k get ns|grep -v NAME|fzf|awk '{print $1}')";
+	    test "$_ns" != "?" && kubectl config set-context --current --namespace="$_ns";
 	    echo $(kubectl config view --minify --output 'jsonpath={..namespace}');
 	}
 	function kpfws {

@@ -9,7 +9,7 @@ which -s kubectl && echo -n " kube" && {
 	    kubectl config current-context;
 	}
 	function kls {
-	  kubectl logs "$(select\-pod)" "$1";
+	  kubectl logs "$(select\-object pod)" "$@";
 	}
 	function kns {
 	    _ns="$1"
@@ -17,15 +17,18 @@ which -s kubectl && echo -n " kube" && {
 	    test "$_ns" != "?" && kubectl config set-context --current --namespace="$_ns";
 	    echo $(kubectl config view --minify --output 'jsonpath={..namespace}');
 	}
+	function knss {
+	  kubectl config set-context --current --namespace="$(select\-object ns)" "$@";
+	}
 	function kpfws {
 	  if test -z "$1"; then
 	    echo "Please specify the port to be forwarded."
 	  else
-	    kubectl port-forward "$(select\-pod)" "$1:$1";
+	    kubectl port-forward "$(select\-object pod)" "$1:$1";
 	  fi
   }
-  function select-pod {
-    kubectl get pod | grep -v NAME | fzf | awk '{print $1}'
+  function select-object {
+    kubectl get "$1" | grep -v NAME | fzf | awk '{print $1}'
   }
 
 	alias k=kubectl

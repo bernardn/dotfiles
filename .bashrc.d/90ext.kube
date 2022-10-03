@@ -4,14 +4,25 @@
 test -d ~/.rd/bin/ && export PATH=$PATH:~/.rd/bin/
 
 which -s kubectl && echo -n " kube" && {
-	function kns {
-	    test -z "$1" || kubectl config set-context --current --namespace="$1";
-	    echo $(kubectl config view --minify --output 'jsonpath={..namespace}');
-	}
 	function kctx {
 	    test -z "$1" || kubectl config use-context "$1" || kubectl config get-contexts;
 	    kubectl config current-context;
 	}
+	function kls {
+	  kubectl logs "$(select\-pod)" "$1";
+	}
+	function kns {
+	    test -z "$1" || kubectl config set-context --current --namespace="$1";
+	    echo $(kubectl config view --minify --output 'jsonpath={..namespace}');
+	}
+	function kpfws {
+	  if test -z "$1"; then
+	    echo "Please specify the port to be forwarded."
+	  else
+	    kubectl port-forward "$(select\-pod)" "$1:$1";
+	  fi
+  }
+
 
 	alias k=kubectl
 	alias kdp="kubectl delete pods"

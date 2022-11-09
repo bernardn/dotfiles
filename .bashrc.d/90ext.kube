@@ -15,7 +15,7 @@ which -s kubectl && echo -n " kube" && {
 	    _ns="$1"
 	    test -z "$_ns" && _ns="$(k get ns|grep -v NAME|fzf|awk '{print $1}')";
 	    test "$_ns" != "?" && kubectl config set-context --current --namespace="$_ns";
-	    echo $(kubectl config view --minify --output 'jsonpath={..namespace}');
+	    kubectl config view --minify --output 'jsonpath={..namespace}'  ;
 	}
 	function knss {
 	  kubectl config set-context --current --namespace="$(select\-object ns)" "$@";

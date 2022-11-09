@@ -45,6 +45,10 @@
       key: IncludeInternalDebugMenu
       type: bool
       value: true
+    - domain: com.apple.Safari.SandboxBroker
+      key: ShowDevelopMenu
+      type: bool
+      value: true
     - domain: com.apple.desktop
       key: Background
       type: string

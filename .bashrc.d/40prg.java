@@ -1,3 +1,3 @@
 #!/bin/bash
 
-test -x /usr/libexec/java_home && export JAVA_HOME=$(/usr/libexec/java_home)
+test -x /usr/libexec/java_home && jh="$(/usr/libexec/java_home 2>/dev/null)" && export JAVA_HOME="$jh"

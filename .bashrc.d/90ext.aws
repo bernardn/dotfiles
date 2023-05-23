@@ -1,6 +1,11 @@
 #!/bin/bash
-### Load AWS-related stuff
-test -f ~/.aws.rc && echo -n " aws" && source ~/.aws.rc
 
-function aws-region { test -z "$1" || export AWS_DEFAULT_REGION="$1"; echo ${AWS_DEFAULT_REGION};  }
-alias aws-rds-endpoints="aws rds describe-db-instances|jq -r '.DBInstances[].Endpoint.Address'"
+### Load AWS-related stuff
+if which aws>/dev/null; then echo -n " aws:"
+    test -f ~/.aws.rc && source ~/.aws.rc && echo -n " rc"
+
+    function aws-region { test -z "$1" || export AWS_DEFAULT_REGION="$1"; echo "${AWS_DEFAULT_REGION}";  }
+
+    alias aws-rds-endpoints="aws rds describe-db-instances|jq -r '.DBInstances[].Endpoint.Address'"
+  	echo -n \;
+fi

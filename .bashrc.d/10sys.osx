@@ -1,58 +1,59 @@
 #!/bin/bash
+# shellcheck disable=SC1090
 ### OSX specific stuff
 if n=$(uname); test ${n::6} = "Darwin" ; then echo -n " osx:"
-	# Make OSX quiet about using BASH
-	export BASH_SILENCE_DEPRECATION_WARNING=1
+	  # Make OSX quiet about using BASH
+	  export BASH_SILENCE_DEPRECATION_WARNING=1
 
-	# Brew-related stuff
-	export PATH=${PATH}:/opt/homebrew/bin/
-	brew_pfx=$(brew --prefix 2>/dev/null)
-	if [ ! -z "$brew_pfx" ]; then
-		if [ -f $brew_pfx/etc/bash_completion ]; then
-			echo -n " bash-completion"
-			source $brew_pfx/etc/bash_completion
-		fi
-		if [ -f $brew_pfx/etc/bash_completion.d/git-completion.bash ]; then
-			echo -n " git-completion"
-			source $brew_pfx/etc/bash_completion.d/git-completion.bash
-		fi
-		if [ -f $brew_pfx/etc/grc.bashrc ]; then
-			echo -n " grc"
-			source $brew_pfx/etc/grc.bashrc
-		fi
-		# Add homebrew sbin to PATH variable
-		test -d $brew_pfx/sbin && export PATH=$PATH:$brew_pfx/sbin
-	fi
-	
-	# Fix locale
-	for k in LC_COLLATE LC_CTYPE LC_MESSAGES LC_MONETARY LC_NUMERIC LC_TIME; do
-		v=$(printenv $k)
-		d="/usr/share/locale/"${v:-"null"}
-		test $k =  'LC_ALL' && test -d $d && LC_FALLBACK=$LC_ALL
-		test $k != 'LC_ALL' && test ! -d $d && declare $k=$LC_FALLBACK && export $k;
-	done
-	
-	## Aliases
-	alias app-signature="codesign -dvvv"
+	  # Brew-related stuff
+	  if test -d /opt/homebrew/bin/; then echo -n " homebrew"
+        export PATH=${PATH}:/opt/homebrew/bin
+        brew_pfx=$(brew --prefix 2>/dev/null)
+        if [ -n "$brew_pfx" ]; then
+            if [ -d "$brew_pfx/etc/bash_completion.d" ]; then
+                echo -n "+bash-completion"
+                for f in "$brew_pfx/etc/bash_completion.d/"*; do
+                    echo -n "~$(basename $f)"
+                    source "$f"
+                done
+            fi
+            if [ -f "$brew_pfx/etc/grc.bashrc" ]; then
+              echo -n "+grc"
+              source "$brew_pfx/etc/grc.bashrc"
+            fi
+            # Add homebrew sbin to PATH variable
+            test -d "$brew_pfx/sbin" && export PATH="$PATH:$brew_pfx/sbin"
+        fi
+    fi
 
-	alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
+    # Fix locale
+#    for k in LC_COLLATE LC_CTYPE LC_MESSAGES LC_MONETARY LC_NUMERIC LC_TIME; do
+#      v=$(printenv $k)
+#      d="/usr/share/locale/"${v:-"null"}
+#      test $k =  'LC_ALL' && test -d "$d" && LC_FALLBACK="$LC_ALL"
+#      test $k != 'LC_ALL' && test ! -d "$d" && declare $k="$LC_FALLBACK" && export "$k";
+#    done
 
-  alias ssh-load-kc="ssh-add --apple-load-keychain"
+    ## Aliases
+    alias app-signature="codesign -dvvv"
 
-	# hibernation and sleep settings
-	alias hibernate='sudo pmset -a hibernatemode 25'
-	alias sleepmode='sudo pmset -a hibernatemode 0'
-	alias safesleep='sudo pmset -a hibernatemode 3'
-	alias smartsleep='sudo pmset -a hibernatemode 2'
-	alias logic='/Applications/Logic\ Pro\ X.app/Contents/MacOS/Logic\ Pro\ X'
-	function group-members-bsd { dscacheutil -q group -a name "$1" | grep ^users | sed 's/^users: //'; }
-	
-	## Colorization
-	export LSCOLORS=ExfxcxdxBxegedabagacad
+    alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
 
-	## Python
-	PATH="/Library/Frameworks/Python.framework/Versions/Current/bin:${PATH}"
-	export PATH
+    alias ssh-add-lkc="ssh-add --apple-load-keychain"
 
-	echo -n \;
+    # hibernation and sleep settings
+    alias hibernate='sudo pmset -a hibernatemode 25'
+    alias sleepmode='sudo pmset -a hibernatemode 0'
+    alias safesleep='sudo pmset -a hibernatemode 3'
+    alias smartsleep='sudo pmset -a hibernatemode 2'
+    alias logic='/Applications/Logic\ Pro\ X.app/Contents/MacOS/Logic\ Pro\ X'
+    function group-members-bsd { dscacheutil -q group -a name "$1" | grep ^users | sed 's/^users: //'; }
+
+    ## Colorization
+    export LSCOLORS=ExfxcxdxBxegedabagacad
+
+    ## Python
+    export PATH="/Library/Frameworks/Python.framework/Versions/Current/bin:${PATH}"
+
+    echo -n \;
 fi

@@ -6,25 +6,25 @@
         - name: fzf
         - name: helm
         - name: mas
-        - name: micronaut
+#        - name: micronaut
         - name: terraform
         - name: tfsec
       cask:
-        - name: cloudflare-warp
-        - name: docker
-        - name: eset-cyber-security-pro
-        - name: google-chrome
-        - name: google-cloud-sdk
+#        - name: cloudflare-warp
+#        - name: docker   # ! Requires subscription
+#        - name: eset-cyber-security-pro
+#        - name: google-chrome
+#        - name: google-cloud-sdk
         - name: iterm2
         - name: pycharm-ce
         # - name: rancher
-        - name: veracrypt
-      mas:
-        - 425424353  # The Unarchiver
-        - 467622356  # Abby Lingvo
-        - 497799835  # XCode
-        - 803453959  # Slack
-        - 930093508  # Shapes
+#        - name: veracrypt
+      mas: []
+#        - 425424353  # The Unarchiver
+#        - 467622356  # Abby Lingvo
+#        - 497799835  # XCode
+#        - 803453959  # Slack
+#        - 930093508  # Shapes
     packages_exclude:
       brew: []
       cask: []
@@ -49,10 +49,10 @@
       key: ShowDevelopMenu
       type: bool
       value: true
-    - domain: com.apple.desktop
-      key: Background
-      type: string
-      value: '{default = {ImageFilePath = "{{ ansible_env.HOME }}/Pictures/Desktop/new-iguana-species-found-hiding-in-plain-sight-4.png"; };}'
+#    - domain: com.apple.desktop
+#      key: Background
+#      type: string
+#      value: '{default = {ImageFilePath = "{{ ansible_env.HOME }}/Pictures/Desktop/new-iguana-species-found-hiding-in-plain-sight-4.png"; };}'
     - domain: com.apple.desktopservices
       key: DSDontWriteNetworkStores
       type: bool
@@ -96,6 +96,18 @@
     - domain: com.apple.screencapture
       key: location
       type: string
+    - domain: com.apple.mouse
+      key: scaling
+      type: float
+      value: 3
+    - domain: com.apple.trackpad
+      key: scaling
+      type: float
+      value: 3
+    - domain: com.apple.AppleMultitouchTrackpad
+      key: Clicking
+      type: bool
+      value: true
       value: "{{ ansible_env.HOME }}/Pictures/screenshots"
   roles:
   - role: brew

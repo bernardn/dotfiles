@@ -57,3 +57,4 @@ if n=$(uname); test ${n::6} = "Darwin" ; then echo -n " osx:"
 
     echo -n \;
 fi
+~/.dotfiles/.bashrc.d/99ext.oracle
